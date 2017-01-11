@@ -1,0 +1,28 @@
+{
+  "name": "node-xsltproc",
+  "version": "1.0.0",
+  "description": "wrapper around xsltproc with profiling information",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "make test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ticapix/node-xsltproc.git"
+  },
+  "keywords": [
+    "xsltproc"
+  ],
+  "author": "ticapix",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/ticapix/node-xsltproc/issues"
+  },
+  "homepage": "https://github.com/ticapix/node-xsltproc#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-jshint": "^2.0.4",
+    "gulp-mocha": "^3.0.1",
+    "jshint": "^2.9.4"
+  }
+}
