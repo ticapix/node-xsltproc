@@ -5,7 +5,7 @@
 
 First install the xsltproc if not already installed on your system read [installing an XSLT processor](http://www.sagehill.net/docbookxsl/InstallingAProcessor.html).
 
-Install the module with: `npm install xsltproc --save`
+Install the module with: `npm install node-xsltproc --save`
 
 ### Options
 
