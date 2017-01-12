@@ -38,7 +38,7 @@ metadata { message: '',
 output <h1>My</h1> <h2>page content</h2>
 ```
 
-#### using a specific path and stylesheet+xml files
+#### using stylesheet+xml files
 
 ```javascript
 const xsltproc = require('node-xsltproc');
