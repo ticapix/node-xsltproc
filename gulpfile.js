@@ -13,7 +13,7 @@ const testdir = path.resolve(__dirname, argv.testdir || 'test');
 
 const files = {
 	source : path.join(sourcedir, '**', '*.js'),
-	other : ['LICENSE', 'README', 'package.json']
+	other : ['LICENSE', 'README*', 'package.json']
 }
 
 gulp.task('lint', function() {
@@ -23,17 +23,17 @@ gulp.task('lint', function() {
 });
 
 gulp.task('test', () => {
-	return gulp.src(path.join(testdir, 'test.js'))
+	return gulp.src(path.join(testdir, 'test*.js'))
     .pipe(mocha({reporter: 'spec'}));
 });
 
 gulp.task('clean', function () {
     return gulp.src(distdir, {read: false})
-        .pipe(clean());
+    .pipe(clean());
 });
 
 gulp.task('dist',['clean', 'test'], function() {
-	return gulp.src(files.source, {base: path.join(__dirname, sourcedir)})
+	return gulp.src(files.source, {base: path.resolve(__dirname, sourcedir)})
 	.pipe(addsrc(files.other))
     .pipe(gulp.dest(distdir))
 });
