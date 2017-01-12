@@ -16,7 +16,7 @@ Install the module with: `npm install node-xsltproc --save`
 #### using an optional path for xsltproc
 
 ```javascript
-const xsltproc = require('xsltproc');
+const xsltproc = require('node-xsltproc');
 
 xsltproc({xsltproc_path: '/home/user/local/bin'}).transform('test/fixtures/page.xml').then((data) => {
 	console.log('metadata', data.metadata);
@@ -41,7 +41,7 @@ output <h1>My</h1> <h2>page content</h2>
 #### using a specific path and stylesheet+xml files
 
 ```javascript
-const xsltproc = require('xsltproc');
+const xsltproc = require('node-xsltproc');
 
 xsltproc().transform(['test/fixtures/menu.xsl', 'test/fixtures/menu.xml']).then((data) => {
 	console.log(data.metadata);
