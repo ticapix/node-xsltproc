@@ -2,5 +2,5 @@
 <!DOCTYPE note SYSTEM "variables.dtd">
 <?xml-stylesheet type="text/xsl" href="page.xsl"?>
 <page title="My">
-  <content>page content</content>
+	<content>page content</content>
 </page>
