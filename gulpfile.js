@@ -16,23 +16,23 @@ const files = {
 	other : ['LICENSE', 'README*', 'package.json']
 }
 
-gulp.task('lint', function() {
+gulp.task('lint', () => {
 	return gulp.src([path.join('**',' *.js'), '!node_modules/**'])
     .pipe(jshint({esversion: 6, node: true}))
     .pipe(jshint.reporter('default'));
 });
 
-gulp.task('test', () => {
+gulp.task('test', ['lint'], () => {
 	return gulp.src(path.join(testdir, 'test*.js'))
     .pipe(mocha({reporter: 'spec'}));
 });
 
-gulp.task('clean', function () {
+gulp.task('clean', () => {
     return gulp.src(distdir, {read: false})
     .pipe(clean());
 });
 
-gulp.task('dist',['clean', 'test'], function() {
+gulp.task('dist',['clean', 'test'], () => {
 	return gulp.src(files.source, {base: path.resolve(__dirname, sourcedir)})
 	.pipe(addsrc(files.other))
     .pipe(gulp.dest(distdir))
