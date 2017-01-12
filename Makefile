@@ -11,17 +11,23 @@ RM=rm -rf
 help: ## show this help
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-15s\033[0m %s\n", $$1, $$2}'
 
-test: install-dev ## run test
-	$(GULP) test
-
-install-dev: $(NODE_DIR) ## install development dependencies
+clean: ## remove all created artefacts
+	$(RM) $(NODE_DIR)
+	$(RM) $(DIST_DIR)
 
 $(NODE_DIR):
 	npm install
 
-dist: clean install-dev ## create a clean distribution folder
-	$(GULP) dist
+install-dev: $(NODE_DIR) ## install development dependencies
 
-clean: ## remove locally created artefact
-	$(RM) $(NODE_DIR)
-	$(RM) $(DIST_DIR)
+test: install-dev ## run test
+	$(GULP) test --sourcedir $(SRC_DIR) --testdir $(TEST_DIR) --distdir $(DIST_DIR)
+
+$(DIST_DIR): install-dev
+	$(GULP) dist --sourcedir $(SRC_DIR) --testdir $(TEST_DIR) --distdir $(DIST_DIR)
+
+dist: $(DIST_DIR) ## create a clean distribution folder
+
+publish: clean test dist ## clean, test and publish artefact to npm registry
+	cd $(DIST_DIR) && npm publish
+
