@@ -27,10 +27,11 @@ describe('xsltproc', function() {
 			});
 		});
 		it('check message', () => {
-			return xsltproc().transform(path.join(fixtures_path, 'menu.xml')).then((data) => {
+			let files = [path.join(fixtures_path, 'menu.xsl'), path.join(fixtures_path, 'menu.xml')]
+			return xsltproc().transform(files).then((data) => {
 				assert.notEqual(data.metadata.message.indexOf('warning: failed to load external entity'), -1);
 				assert.notEqual(data.metadata.message.indexOf('fakefile.dtd'), -1);
-				assert.deepEqual(data.metadata.includes, ['menu.xml', 'menu.xsl']);
+				assert.deepEqual(data.metadata.includes, ['menu.xsl', 'menu.xml']);
 				assert.equal(data.metadata.functions[0].fctName, 'menu');
 			});
 		});
