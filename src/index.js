@@ -85,11 +85,20 @@ function xsltproc(options) {
 	}
 	function transform(filepath) {
 		return new Promise((resolve, reject) => {
-			execFile(xsltproc_bin, [filepath, '--load-trace', '--profile', '--output',  '-'], (error, stdout, stderr) => {
+			let args = ['--load-trace', '--profile', '--output',  '-'];
+			let basedir;
+			if (filepath.constructor === Array) {
+				args = args.concat(filepath);
+				basedir = path.dirname(filepath[0]);
+			} else {
+				args.push(filepath);
+				basedir = path.dirname(filepath);
+			}
+			execFile(xsltproc_bin, args, (error, stdout, stderr) => {
 				if (error !== null) {
 					return reject({file: filepath, message: stderr});
         	    }
-        	    let metadata = XsltProcParser(stderr, path.dirname(filepath));
+        	    let metadata = XsltProcParser(stderr, basedir);
             	return resolve({result: stdout, metadata: metadata});
             });
 		});
