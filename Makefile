@@ -26,8 +26,8 @@ test: install-dev ## run test
 $(DIST_DIR): install-dev
 	$(GULP) dist --sourcedir $(SRC_DIR) --testdir $(TEST_DIR) --distdir $(DIST_DIR)
 
-dist: $(DIST_DIR) ## create a clean distribution folder
+dist: $(DIST_DIR) ## test and create a clean distribution folder
 
-publish: clean test dist ## clean, test and publish artefact to npm registry
+publish: clean dist ## clean, test and publish artefact to npm registry
 	cd $(DIST_DIR) && npm publish
 
