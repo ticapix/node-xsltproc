@@ -19,6 +19,9 @@ install-dev: $(NODE_DIR) ## install development dependencies
 $(NODE_DIR):
 	npm install
 
+dist: clean install-dev ## create a clean distribution folder
+	$(GULP) dist
+
 clean: ## remove locally created artefact
 	$(RM) $(NODE_DIR)
 	$(RM) $(DIST_DIR)
