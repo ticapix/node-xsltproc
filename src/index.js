@@ -37,7 +37,7 @@ function XsltProcParser(output, pathPrefix) {
 				continue;
 			}
 			let id = parseInt(ans[1], 10);
-			assert(fcts[id].id === id);
+			assert.equal(fcts[id].id, id, 'fail to match function indexes while parsing xsltproc output');
 			fcts[id].fctName = ans[2];
 			fcts[id].source = path.relative(pathPrefix, ans[3]);
 			fcts[id].line = parseInt(ans[4], 10);
@@ -99,7 +99,7 @@ function xsltproc(options) {
 			}
 			for (let key in run_options.stringparams) {
 				let value = run_options.stringparams[key];
-				assert.equal(true, typeof value === 'string' || value instanceof String);
+				assert.equal(true, typeof value === 'string' || value instanceof String, `value of '${key}' must be a string`);
 				args = args.concat(['--stringparam', key, value]);
 			}
 			if (run_options.debug) {

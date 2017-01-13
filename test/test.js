@@ -9,11 +9,15 @@ describe('xsltproc', function() {
 		it('should fail if binary not available', () => {
 			assert.throws(() => xsltproc({xsltproc_path: '/'}), Error);
 		});
-
 		it('call transform with not existing file', () => {
 			let filename = 'file_which_do_not_exists';
 			return xsltproc().transform(filename).catch((error) => {
 				assert.equal(error.file, filename);
+			});
+		});
+		it('check stringparams are string', () => {
+			return xsltproc().transform(path.join(fixtures_path, 'params.xml'), {stringparams: {n: 42}}).catch((error) => {
+				assert.equal(error.message, "value of 'n' must be a string");
 			});
 		});
 	});
