@@ -35,5 +35,13 @@ describe('xsltproc', function() {
 				assert.equal(data.metadata.functions[0].fctName, 'menu');
 			});
 		});
+		it('check params', () => {
+			return xsltproc().transform(path.join(fixtures_path, 'params.xml'), {debug: true, params: {n: '42'}}).then((data) => {
+				assert.equal(data.result, 'n=42');
+				assert.equal(data.metadata.message, '');
+				assert.deepEqual(data.metadata.includes, ['params.xml', 'params.xsl']);
+				assert.equal(data.metadata.functions[0].fctName, '@*|*');
+			});
+		});
 	});
 });
