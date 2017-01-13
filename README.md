@@ -11,7 +11,14 @@ Install the module with: `npm install node-xsltproc --save`
 
 ### Options
 
+#### xsltproc options
+
 - `xsltproc_path` : specify the path for xsltproc
+
+#### transform options
+
+- `debug` : add extra verbose message (default: false)
+- `stringparams` : add stringparam (default: {})
 
 ### Exemples
 
@@ -48,5 +55,16 @@ const xsltproc = require('node-xsltproc');
 xsltproc().transform(['test/fixtures/menu.xsl', 'test/fixtures/menu.xml']).then((data) => {
 	console.log(data.metadata);
 	console.log(data.result);
+});
+```
+
+#### using stringparam
+
+```javascript
+const xsltproc = require('node-xsltproc');
+
+xsltproc().transform('test/fixtures/params.xml'), {stringparams: {n: '42'}}).then((data) => {
+  console.log(data.metadata);
+  console.log(data.result);
 });
 ```
