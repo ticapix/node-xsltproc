@@ -83,7 +83,10 @@ function xsltproc(options) {
 	} catch (ex) {
 		throw new Error(`error in executing ${xsltproc_bin}`);
 	}
-	function transform(filepath) {
+	function transform(filepath, run_options) {
+		run_options = run_options || {};
+		run_options.params = run_options.params || {};
+		run_options.debug = run_options.debug === undefined ? false : run_options.debug;
 		return new Promise((resolve, reject) => {
 			let args = ['--load-trace', '--profile', '--output',  '-'];
 			let basedir;
@@ -93,6 +96,14 @@ function xsltproc(options) {
 			} else {
 				args.push(filepath);
 				basedir = path.dirname(filepath);
+			}
+			for (let key in run_options.params) {
+				let value = run_options.params[key];
+				assert.equal(true, typeof value === 'string' || value instanceof String);
+				args = args.concat(['--stringparam', key, value]);
+			}
+			if (run_options.debug) {
+				console.log('exec:', xsltproc_bin, args.join(' '));
 			}
 			execFile(xsltproc_bin, args, (error, stdout, stderr) => {
 				if (error !== null) {
