@@ -31,7 +31,7 @@ describe('xsltproc', function() {
 			});
 		});
 		it('check message', () => {
-			let files = [path.join(fixtures_path, 'menu.xsl'), path.join(fixtures_path, 'menu.xml')]
+			let files = [path.join(fixtures_path, 'menu.xsl'), path.join(fixtures_path, 'menu.xml')];
 			return xsltproc().transform(files).then((data) => {
 				assert.notEqual(data.metadata.message.indexOf('warning: failed to load external entity'), -1);
 				assert.notEqual(data.metadata.message.indexOf('fakefile.dtd'), -1);

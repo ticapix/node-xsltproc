@@ -14,10 +14,10 @@ const testdir = path.resolve(__dirname, argv.testdir || 'test');
 const files = {
 	source : path.join(sourcedir, '**', '*.js'),
 	other : ['LICENSE', 'README*', 'package.json']
-}
+};
 
 gulp.task('lint', () => {
-	return gulp.src([path.join('**',' *.js'), '!node_modules/**'])
+	return gulp.src([path.join('**','*.js'), '!node_modules/**'])
     .pipe(jshint({esversion: 6, node: true}))
     .pipe(jshint.reporter('default'));
 });
@@ -35,7 +35,7 @@ gulp.task('clean', () => {
 gulp.task('dist',['clean', 'test'], () => {
 	return gulp.src(files.source, {base: path.resolve(__dirname, sourcedir)})
 	.pipe(addsrc(files.other))
-    .pipe(gulp.dest(distdir))
+    .pipe(gulp.dest(distdir));
 });
 
 gulp.task('default', ['lint', 'test']);
