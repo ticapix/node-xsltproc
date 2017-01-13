@@ -85,7 +85,7 @@ function xsltproc(options) {
 	}
 	function transform(filepath, run_options) {
 		run_options = run_options || {};
-		run_options.params = run_options.params || {};
+		run_options.stringparams = run_options.stringparams || {};
 		run_options.debug = run_options.debug === undefined ? false : run_options.debug;
 		return new Promise((resolve, reject) => {
 			let args = ['--load-trace', '--profile', '--output',  '-'];
@@ -97,8 +97,8 @@ function xsltproc(options) {
 				args.push(filepath);
 				basedir = path.dirname(filepath);
 			}
-			for (let key in run_options.params) {
-				let value = run_options.params[key];
+			for (let key in run_options.stringparams) {
+				let value = run_options.stringparams[key];
 				assert.equal(true, typeof value === 'string' || value instanceof String);
 				args = args.concat(['--stringparam', key, value]);
 			}
