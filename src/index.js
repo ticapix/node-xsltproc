@@ -77,6 +77,9 @@ function XsltProcParser(output, pathPrefix) {
 
 function xsltproc(options) {
 	options = options || {};
+	if(options.metadata === undefined) {
+		options.metadata = true
+    }
 	let xsltproc_bin = path.join(options.xsltproc_path || '', 'xsltproc');
 	try {
 		let ans = execFileSync(xsltproc_bin, ['--version']);
@@ -109,7 +112,10 @@ function xsltproc(options) {
 				if (error !== null) {
 					return reject({file: filepath, message: stderr});
         	    }
-        	    let metadata = XsltProcParser(stderr, basedir);
+                let metadata;
+                if(options.metadata === true) {
+                    metadata = XsltProcParser(stderr, basedir);
+				}
             	return resolve({result: stdout, metadata: metadata});
             });
 		});
