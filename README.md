@@ -19,6 +19,7 @@ Install the module with: `npm install node-xsltproc --save`
 
 - `debug` : add extra verbose message (default: false)
 - `stringparams` : add stringparam (default: {})
+- `metadata` : whether metadata should be parsed from xsltproc output (default: true)
 
 ### Exemples
 
