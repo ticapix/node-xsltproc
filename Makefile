@@ -14,6 +14,7 @@ help: ## show this help
 clean: ## remove all created artefacts
 	$(RM) $(NODE_DIR)
 	$(RM) $(DIST_DIR)
+	$(RM) package-lock.json
 
 $(NODE_DIR):
 	npm install

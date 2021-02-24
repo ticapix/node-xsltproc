@@ -1,6 +1,6 @@
 {
   "name": "node-xsltproc",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "wrapper around xsltproc with profiling information",
   "main": "src/index.js",
   "scripts": {

@@ -28,7 +28,7 @@ gulp.task('test', gulp.series('lint', () => {
 }));
 
 gulp.task('clean', () => {
-    return gulp.src(distdir, {read: false})
+    return gulp.src(distdir, {read: false, allowEmpty: true})
     .pipe(clean());
 });
 
