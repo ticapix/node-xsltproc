@@ -93,17 +93,17 @@ function xsltproc(options) {
 		return new Promise((resolve, reject) => {
 			let args = ['--load-trace', '--profile', '--output',  '-'];
 			let basedir;
+			for (let key in run_options.stringparams) {
+				let value = run_options.stringparams[key];
+				assert.equal(true, typeof value === 'string' || value instanceof String, `value of '${key}' must be a string`);
+				args = args.concat(['--stringparam', key, value]);
+			}
 			if (filepath.constructor === Array) {
 				args = args.concat(filepath);
 				basedir = path.dirname(filepath[0]);
 			} else {
 				args.push(filepath);
 				basedir = path.dirname(filepath);
-			}
-			for (let key in run_options.stringparams) {
-				let value = run_options.stringparams[key];
-				assert.equal(true, typeof value === 'string' || value instanceof String, `value of '${key}' must be a string`);
-				args = args.concat(['--stringparam', key, value]);
 			}
 			if (run_options.debug) {
 				console.log('exec:', xsltproc_bin, args.join(' '));
