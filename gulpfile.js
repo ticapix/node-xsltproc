@@ -22,20 +22,20 @@ gulp.task('lint', () => {
     .pipe(jshint.reporter('default'));
 });
 
-gulp.task('test', ['lint'], () => {
+gulp.task('test', gulp.series('lint', () => {
 	return gulp.src(path.join(testdir, 'test*.js'))
     .pipe(mocha({reporter: 'spec'}));
-});
+}));
 
 gulp.task('clean', () => {
     return gulp.src(distdir, {read: false})
     .pipe(clean());
 });
 
-gulp.task('dist',['clean', 'test'], () => {
+gulp.task('dist', gulp.series('clean', 'test', () => {
 	return gulp.src(files.source, {base: path.resolve(__dirname, sourcedir)})
 	.pipe(addsrc(files.other))
     .pipe(gulp.dest(distdir));
-});
+}));
 
-gulp.task('default', ['lint', 'test']);
+gulp.task('default', gulp.series('lint', 'test'));
